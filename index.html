@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>葉祐誠 Victor — Vibe Coding 作品集</title>
-<meta name="description" content="15 個 Vibe Coding 專案，從 PWA 到全端平台、從 Python 自動化到瀏覽器遊戲。">
+<meta name="description" content="14 個 Vibe Coding 專案，從 PWA 到全端平台、從 Python 自動化到瀏覽器遊戲。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -309,7 +309,7 @@ code,.mono{font-family:'JetBrains Mono',monospace}
 <!-- Stats -->
 <div class="container">
 <div class="stats">
-  <div class="stat"><div class="stat-num">15</div><div class="stat-label">專案</div></div>
+  <div class="stat"><div class="stat-num">14</div><div class="stat-label">專案</div></div>
   <div class="stat"><div class="stat-num">11</div><div class="stat-label">已部署上線</div></div>
   <div class="stat"><div class="stat-num">6</div><div class="stat-label">技術領域</div></div>
 </div>
@@ -642,23 +642,6 @@ const PROJECTS = [
     problems: [
       ['完整字先輸看起來反直覺', '偏心量大的字轉速衰耗快，規劃加入轉速條讓玩家理解'],
       ['字形解析在不同系統字型不一致', '固定使用標楷體渲染，確保跨平台一致'],
-    ],
-  },
-  {
-    id: 15, name: '外澳海灘住宿價格監控', sub: '',
-    cat: 'python', type: '自動化工具', status: '完成',
-    deployed: false,
-    desc: '為了找暑假衝浪便宜住宿而做的自動化監控，每天抓 Booking.com 即時價格，低於預算門檻時透過 LINE 通知。',
-    tags: ['Python','SerpAPI','Selenium','LINE Messaging API','pandas','Task Scheduler'],
-    highlights: [
-      '三引擎降級策略：SerpAPI → Selenium 模擬瀏覽器 → requests 直接爬，任一失敗自動降級',
-      '防重複通知：notified.json 紀錄已通知資料，只有新出現或價格下降才通知',
-      '整合既有 LINE Bot 基礎建設：複用和事佬波特的 Channel Access Token',
-    ],
-    problems: [
-      ['Booking.com 反爬蟲 403', '三層引擎降級：SerpAPI → Selenium → requests'],
-      ['Windows cp950 編碼 emoji 崩潰', 'sys.stdout.reconfigure(encoding="utf-8")'],
-      ['每次執行通知相同飯店刷屏', 'notified.json 儲存紀錄，價格下降才重新通知'],
     ],
   },
 ];
