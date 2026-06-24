@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>葉祐誠 Victor — Vibe Coding 作品集</title>
+<meta name="description" content="15 個 Vibe Coding 專案，從 PWA 到全端平台、從 Python 自動化到瀏覽器遊戲。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FFFFFF;--bg-alt:#F4F5F7;--bg-card:#FFFFFF;
+  --text:#1a1a2e;--text-2:#5a5a72;--text-3:#8888a0;
+  --border:#E2E4EA;--border-light:#F0F1F4;
+  --primary:#4F46E5;--primary-light:#EEF2FF;--primary-dark:#3730A3;
+  --pwa:#059669;--pwa-bg:#ECFDF5;
+  --fullstack:#2563EB;--fullstack-bg:#EFF6FF;
+  --python:#D97706;--python-bg:#FFFBEB;
+  --game:#E11D48;--game-bg:#FFF1F2;
+  --chatbot:#7C3AED;--chatbot-bg:#F5F3FF;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow:0 4px 12px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);
+  --shadow-lg:0 10px 30px rgba(0,0,0,.08),0 4px 8px rgba(0,0,0,.04);
+  --radius:14px;--radius-sm:8px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Noto Sans TC',system-ui,-apple-system,sans-serif;
+  background:var(--bg-alt);color:var(--text);
+  line-height:1.7;-webkit-font-smoothing:antialiased;
+}
+a{color:var(--primary);text-decoration:none}
+a:hover{text-decoration:underline}
+code,.mono{font-family:'JetBrains Mono',monospace}
+
+/* Layout */
+.container{max-width:860px;margin:0 auto;padding:0 20px}
+
+/* Hero */
+.hero{
+  background:var(--bg);
+  padding:52px 0 40px;
+  border-bottom:1px solid var(--border-light);
+}
+.hero-inner{text-align:center}
+.hero h1{font-size:2rem;font-weight:900;letter-spacing:-.02em;margin-bottom:6px}
+.hero .subtitle{color:var(--text-2);font-size:1.05rem;margin-bottom:20px}
+.hero-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-links a{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 18px;border-radius:99px;font-size:.88rem;font-weight:500;
+  border:1px solid var(--border);color:var(--text);
+  transition:all .2s;
+}
+.hero-links a:hover{border-color:var(--primary);color:var(--primary);text-decoration:none;background:var(--primary-light)}
+
+/* Stats */
+.stats{
+  display:flex;justify-content:center;gap:32px;
+  padding:24px 0;flex-wrap:wrap;
+}
+.stat{text-align:center}
+.stat-num{font-size:1.8rem;font-weight:900;color:var(--primary)}
+.stat-label{font-size:.78rem;color:var(--text-3);font-weight:500}
+
+/* Filter */
+.filter-bar{
+  display:flex;gap:8px;padding:20px 0 12px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.filter-bar::-webkit-scrollbar{display:none}
+.filter-btn{
+  flex-shrink:0;padding:7px 18px;border-radius:99px;
+  border:1.5px solid var(--border);background:var(--bg);
+  font-size:.85rem;font-weight:500;color:var(--text-2);
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.filter-btn:hover{border-color:var(--primary);color:var(--primary)}
+.filter-btn.active{
+  background:var(--primary);color:#fff;border-color:var(--primary);
+}
+
+/* Section */
+.section{padding:32px 0}
+.section-title{
+  font-size:1.15rem;font-weight:700;margin-bottom:18px;
+  display:flex;align-items:center;gap:8px;
+}
+.section-title::before{
+  content:'';width:4px;height:20px;border-radius:2px;
+  background:var(--primary);flex-shrink:0;
+}
+
+/* Project Cards */
+.cards{display:flex;flex-direction:column;gap:14px}
+.card{
+  background:var(--bg-card);border-radius:var(--radius);
+  border:1px solid var(--border-light);
+  box-shadow:var(--shadow-sm);transition:all .25s;
+  overflow:hidden;
+}
+.card:hover{box-shadow:var(--shadow);border-color:var(--border)}
+.card-header{padding:20px 20px 16px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px}
+.card-type{
+  font-size:.72rem;font-weight:600;padding:3px 10px;
+  border-radius:99px;letter-spacing:.02em;
+}
+.type-pwa{background:var(--pwa-bg);color:var(--pwa)}
+.type-fullstack{background:var(--fullstack-bg);color:var(--fullstack)}
+.type-python{background:var(--python-bg);color:var(--python)}
+.type-game{background:var(--game-bg);color:var(--game)}
+.type-chatbot{background:var(--chatbot-bg);color:var(--chatbot)}
+.card-status{
+  font-size:.72rem;font-weight:500;color:var(--text-3);
+  display:flex;align-items:center;gap:4px;
+}
+.card-status .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#22C55E;flex-shrink:0;
+}
+.card-status .dot.offline{background:var(--text-3)}
+.card h3{font-size:1.08rem;font-weight:700;margin-bottom:6px;line-height:1.4}
+.card-num{color:var(--text-3);font-weight:500;font-size:.88rem}
+.card-desc{font-size:.88rem;color:var(--text-2);margin-bottom:12px;line-height:1.6}
+.card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tag{
+  font-size:.73rem;padding:3px 10px;border-radius:6px;
+  background:var(--bg-alt);color:var(--text-2);font-weight:500;
+}
+.card-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:7px 16px;border-radius:var(--radius-sm);
+  font-size:.82rem;font-weight:500;transition:all .2s;
+  border:1px solid transparent;
+}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-dark);text-decoration:none}
+.btn-outline{border-color:var(--border);color:var(--text-2)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary);text-decoration:none}
+.btn-expand{
+  margin-left:auto;padding:7px 12px;border:none;background:none;
+  color:var(--text-3);cursor:pointer;font-size:.82rem;
+  display:flex;align-items:center;gap:4px;font-weight:500;
+  border-radius:var(--radius-sm);
+}
+.btn-expand:hover{color:var(--primary);background:var(--primary-light)}
+.btn-expand svg{transition:transform .25s}
+.card.open .btn-expand svg{transform:rotate(180deg)}
+
+/* Card Detail */
+.card-detail{
+  max-height:0;overflow:hidden;transition:max-height .35s ease;
+}
+.card.open .card-detail{max-height:3000px}
+.card-detail-inner{
+  padding:0 20px 20px;
+  border-top:1px solid var(--border-light);
+  margin-top:0;
+}
+.detail-section{margin-top:18px}
+.detail-section h4{
+  font-size:.85rem;font-weight:700;color:var(--text);
+  margin-bottom:10px;display:flex;align-items:center;gap:6px;
+}
+.detail-section ul{list-style:none;padding:0}
+.detail-section li{
+  position:relative;padding-left:16px;margin-bottom:8px;
+  font-size:.84rem;color:var(--text-2);line-height:1.6;
+}
+.detail-section li::before{
+  content:'';position:absolute;left:0;top:9px;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--primary);opacity:.5;
+}
+.problem-table{width:100%;font-size:.82rem;border-collapse:collapse}
+.problem-table th{
+  text-align:left;padding:8px 10px;
+  background:var(--bg-alt);font-weight:600;
+  border-bottom:1px solid var(--border);
+  color:var(--text);font-size:.78rem;
+}
+.problem-table td{
+  padding:10px;border-bottom:1px solid var(--border-light);
+  color:var(--text-2);vertical-align:top;line-height:1.5;
+}
+.problem-table tr:last-child td{border-bottom:none}
+.problem-table td:first-child{
+  font-weight:500;color:var(--text);width:38%;
+}
+
+/* Stock Evolution */
+.evo-section{
+  background:var(--bg);border-radius:var(--radius);
+  border:1px solid var(--border-light);box-shadow:var(--shadow-sm);
+  padding:24px 20px;margin-bottom:14px;
+}
+.evo-flow{
+  display:flex;flex-direction:column;gap:0;margin:16px 0;
+}
+.evo-step{
+  display:flex;gap:14px;align-items:flex-start;
+  position:relative;padding-bottom:20px;
+}
+.evo-step:last-child{padding-bottom:0}
+.evo-step::before{
+  content:'';position:absolute;left:15px;top:32px;
+  width:2px;bottom:0;background:var(--border);
+}
+.evo-step:last-child::before{display:none}
+.evo-dot{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;color:#fff;
+  background:var(--primary);position:relative;z-index:1;
+}
+.evo-content h4{font-size:.95rem;font-weight:700;margin-bottom:4px}
+.evo-content p{font-size:.84rem;color:var(--text-2);line-height:1.6}
+
+/* Compare Table */
+.compare-wrap{overflow-x:auto;margin-top:16px;-webkit-overflow-scrolling:touch}
+.compare-table{width:100%;min-width:540px;font-size:.78rem;border-collapse:collapse}
+.compare-table th,.compare-table td{padding:8px 10px;border-bottom:1px solid var(--border-light);text-align:left}
+.compare-table th{background:var(--bg-alt);font-weight:600;color:var(--text);position:sticky;top:0}
+.compare-table td{color:var(--text-2);line-height:1.5}
+.compare-table td:first-child{font-weight:600;color:var(--text);white-space:nowrap}
+
+/* Skills */
+.skills-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:640px){.skills-grid{grid-template-columns:1fr 1fr}}
+.skill-card{
+  background:var(--bg);border-radius:var(--radius-sm);
+  border:1px solid var(--border-light);overflow:hidden;
+}
+.skill-header{
+  padding:12px 16px;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.88rem;font-weight:600;
+  -webkit-tap-highlight-color:transparent;
+}
+.skill-header svg{transition:transform .2s;color:var(--text-3)}
+.skill-card.open .skill-header svg{transform:rotate(180deg)}
+.skill-items{
+  max-height:0;overflow:hidden;transition:max-height .3s ease;
+}
+.skill-card.open .skill-items{max-height:600px}
+.skill-items-inner{padding:0 16px 14px}
+.skill-items-inner span{
+  display:inline-block;font-size:.76rem;padding:4px 10px;
+  margin:3px 4px 3px 0;border-radius:6px;
+  background:var(--bg-alt);color:var(--text-2);font-weight:500;
+}
+
+/* Footer */
+.footer{
+  text-align:center;padding:40px 0 52px;
+  color:var(--text-3);font-size:.82rem;
+}
+.footer a{color:var(--primary)}
+
+/* No results */
+.no-results{
+  text-align:center;padding:60px 20px;color:var(--text-3);
+  font-size:.92rem;
+}
+
+/* Animations */
+.card{animation:fadeUp .35s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* Mobile tweaks */
+@media(max-width:480px){
+  .hero h1{font-size:1.6rem}
+  .stats{gap:20px}
+  .stat-num{font-size:1.5rem}
+  .card-header{padding:16px}
+  .card-detail-inner{padding:0 16px 16px}
+}
+
+/* Scrollbar for compare table */
+.compare-wrap::-webkit-scrollbar{height:4px}
+.compare-wrap::-webkit-scrollbar-track{background:var(--bg-alt);border-radius:2px}
+.compare-wrap::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<header class="hero">
+<div class="container hero-inner">
+  <h1>葉祐誠 Victor</h1>
+  <p class="subtitle">Vibe Coding 作品集 — 用 AI 協作把想法變成真的東西</p>
+  <div class="hero-links">
+    <a href="https://github.com/lml679939-cmyk" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+    <a href="mailto:lml679939@gmail.com">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      Email
+    </a>
+  </div>
+</div>
+</header>
+
+<!-- Stats -->
+<div class="container">
+<div class="stats">
+  <div class="stat"><div class="stat-num">15</div><div class="stat-label">專案</div></div>
+  <div class="stat"><div class="stat-num">11</div><div class="stat-label">已部署上線</div></div>
+  <div class="stat"><div class="stat-num">6</div><div class="stat-label">技術領域</div></div>
+</div>
+</div>
+
+<!-- Main -->
+<main class="container">
+
+<!-- Filter -->
+<div class="filter-bar" id="filterBar"></div>
+
+<!-- Projects -->
+<section class="section">
+  <div class="section-title">專案列表</div>
+  <div class="cards" id="projectCards"></div>
+  <div class="no-results" id="noResults" style="display:none">沒有符合篩選條件的專案</div>
+</section>
+
+<!-- Stock Evolution -->
+<section class="section">
+  <div class="section-title">台股系列：從腳本到平台的迭代故事</div>
+  <div class="evo-section">
+    <p style="font-size:.88rem;color:var(--text-2);margin-bottom:8px">
+      三個專案不是獨立開發，而是同一條演進路線——每次碰到瓶頸就重構，最終收斂成有真實部署的整合平台。
+    </p>
+    <div class="evo-flow">
+      <div class="evo-step">
+        <div class="evo-dot">v1</div>
+        <div class="evo-content">
+          <h4>台股財報監測系統</h4>
+          <p>人工追蹤 24 支個股太麻煩 → 自動化週報。FinMind API 配額、中文附件亂碼等基礎設施問題。</p>
+        </div>
+      </div>
+      <div class="evo-step">
+        <div class="evo-dot">v2</div>
+        <div class="evo-content">
+          <h4>別再看股價了！季報選股機</h4>
+          <p>監測完知道狀況，但不知道「哪些值得買」→ 主動選股。動態 WACC、金融股雙路徑、TTM 年化。</p>
+        </div>
+      </div>
+      <div class="evo-step">
+        <div class="evo-dot">v3</div>
+        <div class="evo-content">
+          <h4>台股智慧選股與監測平台</h4>
+          <p>兩套系統各跑各的 → 拆成 4 個子模組統一 Dashboard。GitHub Actions 全自動排程 + Render 部署。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-wrap">
+    <table class="compare-table">
+      <thead><tr><th>維度</th><th>v1 監測系統</th><th>v2 選股機</th><th>v3 整合平台</th></tr></thead>
+      <tbody>
+        <tr><td>核心目標</td><td>週報通知</td><td>主動選股</td><td>全流程自動化 + 統一視圖</td></tr>
+        <tr><td>資料策略</td><td>FinMind 直接呼叫</td><td>FinMind + CSV 快取</td><td>Parquet 增量快取（API -70%）</td></tr>
+        <tr><td>AI 整合</td><td>Claude API 季度分析</td><td>無</td><td>Gemini 情緒 + 財報分析</td></tr>
+        <tr><td>輸出</td><td>Gmail 週報</td><td>Gmail + Plotly 圖表</td><td>Streamlit Dashboard + Email</td></tr>
+        <tr><td>自動化</td><td>本機手動觸發</td><td>本機 bat 排程</td><td>GitHub Actions 雲端全自動</td></tr>
+        <tr><td>部署</td><td>本機</td><td>本機</td><td>Render 公開 URL</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="section">
+  <div class="section-title">技能總覽</div>
+  <div class="skills-grid" id="skillsGrid"></div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>最後更新：2026-06-24 &nbsp;·&nbsp; Built with Vibe Coding</p>
+  <p style="margin-top:4px"><a href="mailto:lml679939@gmail.com">lml679939@gmail.com</a> &nbsp;·&nbsp; <a href="https://github.com/lml679939-cmyk" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script>
+// ─── Data ───
+const CATEGORIES = [
+  { id: 'all', label: '全部' },
+  { id: 'pwa', label: 'PWA' },
+  { id: 'fullstack', label: '全端' },
+  { id: 'python', label: 'Python 工具' },
+  { id: 'game', label: '遊戲' },
+  { id: 'chatbot', label: 'Chatbot' },
+];
+
+const PROJECTS = [
+  {
+    id: 1, name: '靠聲音學英文', sub: '不用眼睛也能學習',
+    cat: 'pwa', type: '無障礙 PWA', status: '完成',
+    deployed: true,
+    desc: '為視力不佳長者設計的純語音英語學習 PWA，不需眼睛也能獨立操作。',
+    tags: ['HTML','Vanilla JS','Web Speech API','PWA','Tailwind CDN'],
+    live: 'https://lml679939-cmyk.github.io/voice-english-learning/',
+    highlights: [
+      '使用者驅動設計：字體 26px 起跳、按鈕最小 80px、高對比黃字黑底，符合 WCAG 標準',
+      '零依賴單檔架構：整個應用只有一支 index.html，無需安裝、無需網路',
+      'Web Speech API 語音互動：語音辨識 + 語音朗讀，用說的學、用說的練習',
+    ],
+    problems: [
+      ['長者誤觸按鈕中斷練習', '移除懸浮麥克風指示器，改用狀態區塊清晰顯示錄音狀態'],
+      ['語音辨識不穩定', '加入 continuous: false + 手動觸發，每次完整收音後再判斷'],
+      ['無網路環境無法使用', 'Service Worker cache-first 策略，完全離線運作'],
+    ],
+  },
+  {
+    id: 2, name: '台股財報監測系統', sub: '',
+    cat: 'python', type: '自動化工具', status: '完成',
+    deployed: false,
+    desc: '每週自動抓取 24 支台股三大報表與重大訊息，計算財務指標後寄送 Gmail 週報，每季自動呼叫 Claude API 產生深度分析。',
+    tags: ['Python','FinMind API','Parquet','Claude API','Gmail SMTP','ThreadPool'],
+    highlights: [
+      '完整自動化管線：FinMind 抓取 → Parquet 快取 → 指標計算 → Markdown 週報 → Gmail 通知',
+      'Parquet 增量快取：首次全量，後續只抓增量，API 消耗降低 70%+',
+      'ThreadPoolExecutor 4 路平行處理 24 支股票',
+      'Claude API 每季第一個週一自動深度分析',
+    ],
+    problems: [
+      ['TotalLiabilities 誤匹配，DebtRatio 永遠 100%', '精確匹配優先、模糊匹配後備的雙重策略'],
+      ['ROIC 偏低（單季未年化）', 'rolling(4).sum() 滾動四季加總，與年化 WACC 正確比較'],
+      ['Gmail 附件中文檔名亂碼', 'RFC 2231 編碼：add_header filename=("utf-8","","檔名")'],
+      ['FinMind 每日 API 配額限制', 'Parquet 增量快取，首次全量後只請求新增資料'],
+    ],
+  },
+  {
+    id: 3, name: '別再看股價了！季報選股機', sub: '',
+    cat: 'python', type: '財務分析工具', status: '完成 v2.2',
+    deployed: false,
+    desc: '掃描全市場台股，依 ROIC / 毛利率 / WACC 等指標篩選長期投資候選股，輸出 Plotly 互動圖表與 Email 季報。',
+    tags: ['Python','FinMind','Plotly','SQLite','WACC/ROIC','Gmail'],
+    highlights: [
+      '動態 WACC：依產業別（科技、金融、傳產等）套用不同 WACC，避免一刀切',
+      '金融股雙路徑：無 OperatingIncome 時自動切換 ROE > 10% 篩選路徑',
+      'TTM 指標：整合最新季報計算年化 TTM ROIC',
+      '複合評分：毛利率 30% + ROIC 利差 40% + 穩定性 20% + 成長性 10%',
+    ],
+    problems: [
+      ['動態 WACC 在繪圖 / DB 步驟無效', 'batch_data 不含 industry，改從 df_candidates 建立 industry_map'],
+      ['國泰金 ROE 資料缺失', 'FinMind 金融股淨利欄位名為 IncomeAfterTax（無 s），同時加入兩種拼法'],
+      ['Plotly 對數軸顯示 1e+42', '加入 range=[log10(min), log10(max)] + exponentformat="none"'],
+      ['Gmail 表格在 App 橫向捲動被手勢攔截', '從表格改為卡片式單欄排版（v2.2）'],
+    ],
+  },
+  {
+    id: 4, name: '山寨版 Qsearch', sub: 'ThreadMonitor',
+    cat: 'fullstack', type: '輿情監測平台', status: '第一階段完成',
+    deployed: false,
+    desc: '對標 QSearch 輿情分析平台，以 Next.js 打造的 Threads 社群聲量監測工具，具備 AI 輔助摘要與熱門話題雷達。',
+    tags: ['Next.js 14','TypeScript','Tailwind CSS','AI 摘要'],
+    highlights: [
+      '直接拆解 QSearch 教學簡報（PDF），還原核心 UI 與功能邏輯',
+      'AI 即時摘要：點擊聲量圖表節點觸發 AI 摘要彈出',
+      'Next.js App Router + TypeScript 型別安全全端開發',
+    ],
+    problems: [
+      ['開發環境需 HTTPS，瀏覽器 API 受限', '使用 mkcert 產生本機 SSL 憑證'],
+      ['Tailwind v3 與 App Router 衝突', '確認 postcss.config.mjs 路徑，改用 content glob 覆蓋 app/'],
+    ],
+  },
+  {
+    id: 5, name: '防小人護盾', sub: '',
+    cat: 'pwa', type: '情緒輔助 PWA', status: '完成 + 部署',
+    deployed: true,
+    desc: '遇到職場、學校人際衝突時，快速穩住情緒並生成「有界線、有自信」回應句的 PWA 工具。',
+    tags: ['Vanilla JS','Tailwind CDN','Claude Haiku API','PWA','Web Speech API','Vibration API'],
+    live: 'https://lml679939-cmyk.github.io/anti-villain-shield/',
+    highlights: [
+      '情緒分級系統：1–10 燙度評估，依燙度動態顯示對應降溫技巧卡',
+      '情境意圖偵測：關鍵字偵測情境（甩鍋、態度差等），套用模板輸出三種層級回應',
+      '可選 Claude Haiku AI 生成：自備 API Key 解鎖 AI 模式，沒 Key 也能全功能離線使用',
+      '完整 PWA：可安裝到手機主畫面、完全離線使用',
+    ],
+    problems: [
+      ['git 無法在含中文路徑下初始化', '另建英文路徑 anti-villain-shield/ 作為 git 工作目錄'],
+      ['呼吸動畫文字飄移', 'setTimeout 累積誤差，規劃改用 animationiteration 事件同步'],
+    ],
+  },
+  {
+    id: 6, name: '台股智慧選股與監測平台', sub: '',
+    cat: 'python', type: '整合平台', status: '完成 + 部署',
+    deployed: true,
+    desc: '整合「季報選股機」、「財報監測系統」、「新聞輿情分析」三套系統，Streamlit Dashboard 統一呈現，GitHub Actions 全自動雲端排程。',
+    tags: ['Python','Streamlit','GitHub Actions','Render','Gemini API','FinMind','RSS 爬蟲'],
+    live: 'https://taiwan-stock-dashboard-chgq.onrender.com',
+    highlights: [
+      '三系統整合：將前兩個獨立專案重構為可組合模組，加入新聞輿情分析',
+      'GitHub Actions 全自動排程：季報每季 / 財報+輿情每週自動執行，自動 commit 回 repo',
+      '多 AI API 整合：Gemini 新聞情緒評分 + 財報深度分析',
+      '已部署 Live Dashboard：Render 免費方案，外部可直接存取',
+    ],
+    problems: [
+      ['Render 免費方案閒置需 50 秒喚醒', 'README 說明 + Dashboard 首頁 loading 狀態提示'],
+      ['GitHub Actions 需讀取 API 金鑰', '所有敏感資訊存為 GitHub Secrets'],
+      ['新聞情緒 JSON 輸出不穩定', 'Prompt 明確指定 schema + Python fallback 解析'],
+    ],
+  },
+  {
+    id: 7, name: '寧好', sub: '電商書單市集',
+    cat: 'fullstack', type: '全端電商', status: '完成 + 部署',
+    deployed: true,
+    desc: '書單策展人與二手書分享者的多賣家市集平台，買家可依喜好找賣家、下單，並在訂單聊天室完成交付與付款確認。',
+    tags: ['Next.js 15','TypeScript','Tailwind v4','shadcn/ui','Supabase','RLS','Magic Link'],
+    live: 'https://ningho.vercel.app/about',
+    highlights: [
+      '完整電商流程：賣家申請審核 → 商品上架 → 訂單建立 → 匯款確認 → 聊天室交付',
+      'Supabase 全端整合：PostgreSQL + Auth (Magic Link) + Storage 三合一',
+      '角色分流架構：buyer / seller / admin 三角色各有不同權限路由',
+      'Row Level Security 資料庫層授權，buyer 只能看自己的訂單',
+    ],
+    problems: [
+      ['Tailwind v4 設定與 v3 完全不同', 'v4 改為 CSS-first 設定（@import "tailwindcss"）'],
+      ['Supabase client 在 Server/Client Component 需分開', '建立 client.ts 與 server.ts 兩個 helper'],
+      ['多角色資料不互相外洩', 'Supabase RLS Policy 在資料庫層實作授權'],
+    ],
+  },
+  {
+    id: 8, name: '和事佬波特 LINE Bot', sub: '',
+    cat: 'chatbot', type: 'Chatbot', status: '完成 + 部署',
+    deployed: true,
+    desc: '部署在 LINE 群組的 AI 調解機器人，支援「和事佬」與「嗆爆」兩套人格，各有 5 種互動模式。',
+    tags: ['FastAPI','LINE Messaging API','SQLite','Groq API','Gemini API','Railway'],
+    live: 'https://line.me/R/ti/p/@460ezdtg',
+    highlights: [
+      '雙人格 × 5 模式：共 10 種互動模式，透過 Prompt 工程確保語氣差異明顯',
+      '多 LLM 提供商抽象層：統一包裝 Gemini / Groq / DeepSeek，切換環境變數即可換模型',
+      'SQLite 對話記憶：每群組保留最近 12 輪對話，維持上下文連貫',
+      '已上線：Railway 部署，LINE 群組中實際使用',
+    ],
+    problems: [
+      ['Gemini 免費額度耗盡（429）', '設計多 LLM 抽象層，改換 Groq 免費方案'],
+      ['Railway 重新部署 SQLite 資料清空', '識別為 ephemeral storage 限制，規劃掛 Volume'],
+      ['引用回覆只 @ Bot 不說話', '加入對話記憶脈絡，根據被引用訊息自動判斷回應方向'],
+    ],
+  },
+  {
+    id: 9, name: '公車睡過站 GPS 震動提醒', sub: '',
+    cat: 'pwa', type: '出行工具 PWA', status: '完成 v2.5 + 部署',
+    deployed: true,
+    desc: '搭公車時設定目的地，接近時自動震動 + 音效 + Web Push 通知，三段式警報確保不睡過站。',
+    tags: ['Vanilla JS','Leaflet.js','Web Push','OSRM','Web Audio API','Vercel','PWA'],
+    live: 'https://lml679939-cmyk.github.io/bus-alarm-pwa/',
+    highlights: [
+      '三段式警報：500m 預備 → 設定半徑第一段 → 200m 加強震動',
+      'iOS 背景保活：靜音 AudioContext 讓 iOS 維持前景權限 + GPS 看門狗 15 秒偵測',
+      '雙 API 搜尋：Nominatim（地址）+ Overpass（公車站名）並行查詢',
+      'OSRM 到站時間估算：每 30 秒計算實際道路距離，失敗時 fallback 直線 ×1.3',
+      'Web Push 通知：Vercel Serverless 推播，iOS 鎖屏也能收到',
+    ],
+    problems: [
+      ['iOS Safari 背景暫停 JS', 'AudioContext 持續輸出靜音音頻，讓 iOS 視為媒體播放'],
+      ['GPS watchPosition 靜默停止', '看門狗：setInterval 每 15s 檢查，超 45s 自動重啟'],
+      ['iOS 鎖屏無法震動或通知', 'Web Push + Vercel 後端推播，繞過前景限制'],
+      ['頁面滑動被地圖 touch event 攔截', '修正 touch-action: pan-y 與 overflow 設定'],
+    ],
+  },
+  {
+    id: 10, name: '社群輿情監測系統', sub: 'Qsearch 系列 v2',
+    cat: 'python', type: '資料分析後端', status: '完成 + 部署',
+    deployed: true,
+    desc: '真正能跑的輿情後端——爬 PTT + RSS 新聞、HuggingFace 中文情緒模型評分、跨平台事件分群、進階關鍵字查詢。',
+    tags: ['Python','PTT 爬蟲','RSS','HuggingFace BERT','Streamlit','SQLAlchemy','Union-Find'],
+    live: 'https://taiwan-stock-dashboard-chgq.onrender.com/',
+    highlights: [
+      '6 階段迭代開發：PTT 爬蟲 → Dcard 嘗試 → HF 情緒 → 告警 → 留言分析 → RSS + 事件分群',
+      '跨平台事件分群：trigram Jaccard 相似度 + Union-Find，448 篇偵測 5 個跨平台事件',
+      '自製查詢語法：Recursive descent parser 支援 AND/OR/NOT/引號/括號',
+      '告警去重：4 類規則 + AlertLog，避免重複通知',
+    ],
+    problems: [
+      ['Dcard 被 Cloudflare Turnstile 硬體驗證封鎖', '確認是 Secure Enclave 硬體憑證，轉做 RSS 新聞擴充'],
+      ['SQLite 被同時寫入 database is locked', '短期停 scheduler 再開 Streamlit，長期規劃切 PostgreSQL'],
+      ['跨平台分群 O(N²)，N > 5000 效能問題', '目前 N~數百可接受，標注未來需換 MinHash/LSH'],
+    ],
+  },
+  {
+    id: 11, name: 'Spotify Personal Discovery', sub: '',
+    cat: 'python', type: '音樂推薦 App', status: '完成 + 部署',
+    deployed: true,
+    desc: '結合 Spotify 聆聽習慣、時間天氣 GPS、文字心情、拍照氛圍，讓 Gemini 多模態 LLM 打破演算法同溫層推薦歌單。',
+    tags: ['Python','Streamlit','Spotify API','Gemini Vision','Open-Meteo','OAuth 2.0'],
+    live: 'https://spotify-lml.streamlit.app/',
+    highlights: [
+      '多模態情境可疊加：自動偵測（IP 城市 + 天氣 + 時間）+ 文字 + 圖片（Gemini Vision）',
+      '4 步驟模組化開發（M1→M4）：CLI 腳本逐步驗證，最終整合 Streamlit Web UI',
+      '誠實面對 API 限制：Spotify 停用推薦 API，UI 直接告知三個解決方向',
+      '新藝人比例滑桿：0% 只推已知藝人 ~ 100% 完全小眾發掘',
+    ],
+    problems: [
+      ['Spotify 新 App 寫入 API 全部 403', '確認 Development Mode 限制，提示申請 Extended Quota'],
+      ['Gemini 2.0 Flash 免費配額為 0', '診斷腳本列出可用模型，切換到 gemini-2.5-flash'],
+      ['GEMINI_API_KEY 若加 NEXT_PUBLIC_ 前綴會暴露', 'Streamlit st.secrets 管理，金鑰只在伺服器端'],
+    ],
+  },
+  {
+    id: 12, name: 'ArenaTrack 備賽追蹤 App', sub: '',
+    cat: 'fullstack', type: '健身全端 App', status: '完成 + 部署',
+    deployed: true,
+    desc: '健體比賽選手的個人備賽全追蹤 Web App，AI 辨識飲食（文字/拍照）和訓練（截圖匯入），整合飲水、睡眠、身體圍度。',
+    tags: ['Next.js 16','React 19','TypeScript','Firebase','Gemini Flash','PWA','Tailwind v4'],
+    live: 'https://arena-track.vercel.app',
+    highlights: [
+      'AI 多模態辨識：飲食拍照 + 訓練截圖 AI 匯入，Gemini 2.5 Flash 後端呼叫',
+      '三階段動態目標：增肌 / 減脂 / 維持期各有智能公式，主題色隨階段切換',
+      '凌晨 5 點換日邏輯：0–5 點算前一天，符合備賽選手真實作息',
+      '教練回報功能：純函式 buildReport() 整理結構化 Markdown',
+      '手刻 SVG 圖表 + Service Worker：不依賴第三方庫，確保 React 19 相容',
+    ],
+    problems: [
+      ['React 19 ESLint set-state-in-effect 大量違規', '全面重構：derived state + render 期間 setState 守衛'],
+      ['Tailwind v4 無法用 tailwind.config.ts', 'CSS-first：所有 theme token 寫在 @theme block'],
+      ['Firestore 不接受 undefined 值', '寫入前 for-in delete 剔除所有 undefined 欄位'],
+    ],
+  },
+  {
+    id: 14, name: '姓名戰鬥陀螺', sub: '',
+    cat: 'game', type: '瀏覽器遊戲', status: '完成 v2',
+    deployed: false,
+    desc: '輸入中文名字，漢字被解析為物理陀螺參戰——字形決定重量、攻擊力、穩定度，碰撞產生真實結構斷裂。課程活動現場使用。',
+    tags: ['HTML Canvas','物理引擎','BFS','Union-Find','Web Audio API','雙人對戰'],
+    highlights: [
+      '字形轉物理剛體：Canvas 渲染 → 點陣圖 → 15×15 磚塊 → BFS 結構厚度 → 剛體節點',
+      '四項自動屬性：重量（筆畫面積）/ 穩定度（質心偏離）/ 攻擊力（邊界尖角）/ 防禦力（邊界平滑）',
+      '結構斷裂模擬：衝擊超門檻 → 應力傳導至最細頸 → Union-Find 分離碎塊飛出',
+      'v2 節奏打擊：重擊觸發計時條，完美判定可獲 ×2.5 攻擊加成',
+    ],
+    problems: [
+      ['完整字先輸看起來反直覺', '偏心量大的字轉速衰耗快，規劃加入轉速條讓玩家理解'],
+      ['字形解析在不同系統字型不一致', '固定使用標楷體渲染，確保跨平台一致'],
+    ],
+  },
+  {
+    id: 15, name: '外澳海灘住宿價格監控', sub: '',
+    cat: 'python', type: '自動化工具', status: '完成',
+    deployed: false,
+    desc: '為了找暑假衝浪便宜住宿而做的自動化監控，每天抓 Booking.com 即時價格，低於預算門檻時透過 LINE 通知。',
+    tags: ['Python','SerpAPI','Selenium','LINE Messaging API','pandas','Task Scheduler'],
+    highlights: [
+      '三引擎降級策略：SerpAPI → Selenium 模擬瀏覽器 → requests 直接爬，任一失敗自動降級',
+      '防重複通知：notified.json 紀錄已通知資料，只有新出現或價格下降才通知',
+      '整合既有 LINE Bot 基礎建設：複用和事佬波特的 Channel Access Token',
+    ],
+    problems: [
+      ['Booking.com 反爬蟲 403', '三層引擎降級：SerpAPI → Selenium → requests'],
+      ['Windows cp950 編碼 emoji 崩潰', 'sys.stdout.reconfigure(encoding="utf-8")'],
+      ['每次執行通知相同飯店刷屏', 'notified.json 儲存紀錄，價格下降才重新通知'],
+    ],
+  },
+];
+
+const SKILLS = [
+  {
+    title: '前端 / 全端',
+    items: ['HTML/CSS/JS','Next.js 14/15/16','React 19','Tailwind v3/v4','shadcn/ui','Web Speech API','Vibration API','Wake Lock API','Service Worker','PWA','Leaflet.js','手刻 SVG 圖表'],
+  },
+  {
+    title: '後端 / 自動化',
+    items: ['Python','FastAPI','Streamlit','FinMind API','Spotipy OAuth','BeautifulSoup4','feedparser','Selenium','Gmail SMTP','Slack Webhook','ThreadPoolExecutor','Vercel Serverless','Web Push/VAPID'],
+  },
+  {
+    title: '資料庫 / 儲存',
+    items: ['SQLite','SQLAlchemy ORM','Firebase Firestore','Supabase PostgreSQL','Row Level Security','Parquet/pyarrow','Firebase Security Rules'],
+  },
+  {
+    title: 'AI / API 整合',
+    items: ['Claude API (Haiku/Sonnet)','Gemini 2.5 Flash (Vision)','Groq (llama-3.3-70b)','HuggingFace BERT','LINE Messaging API','Spotify Web API','Nominatim/Overpass/OSRM','Prompt Engineering'],
+  },
+  {
+    title: '遊戲開發',
+    items: ['Canvas 2D 手刻引擎','自製 2D 剛體物理','路徑追蹤 AI','BFS 結構計算','Union-Find 斷裂模擬','節奏判定系統'],
+  },
+  {
+    title: 'DevOps / 部署',
+    items: ['GitHub Actions','GitHub Pages','Railway','Render','Vercel','Streamlit Cloud','Firebase Hosting','Git','.env / Secrets 管理'],
+  },
+];
+
+// ─── Rendering ───
+const chevronSVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+
+function renderFilters() {
+  const bar = document.getElementById('filterBar');
+  bar.innerHTML = CATEGORIES.map(c =>
+    `<button class="filter-btn${c.id === 'all' ? ' active' : ''}" data-cat="${c.id}">${c.label}</button>`
+  ).join('');
+  bar.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterProjects(btn.dataset.cat);
+  });
+}
+
+function renderCard(p) {
+  const typeClass = `type-${p.cat}`;
+  const links = [];
+  if (p.live) links.push(`<a href="${p.live}" target="_blank" rel="noopener" class="btn btn-primary">Live <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>`);
+
+  return `
+<div class="card" data-cat="${p.cat}" data-id="${p.id}">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-top">
+      <span class="card-type ${typeClass}">${p.type}</span>
+      <span class="card-status"><span class="dot${p.deployed ? '' : ' offline'}"></span>${p.status}</span>
+    </div>
+    <h3>${p.name}${p.sub ? `<span style="font-weight:400;color:var(--text-3)"> — ${p.sub}</span>` : ''}</h3>
+    <p class="card-desc">${p.desc}</p>
+    <div class="card-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+    <div class="card-actions">
+      ${links.join('')}
+      <button class="btn-expand" onclick="event.stopPropagation();toggleCard(this.closest('.card-header'))">詳細 ${chevronSVG}</button>
+    </div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section">
+        <h4>專案亮點</h4>
+        <ul>${p.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+      </div>
+      ${p.problems.length ? `
+      <div class="detail-section">
+        <h4>問題與解法</h4>
+        <table class="problem-table">
+          <thead><tr><th>問題</th><th>解法</th></tr></thead>
+          <tbody>${p.problems.map(([q,a]) => `<tr><td>${q}</td><td>${a}</td></tr>`).join('')}</tbody>
+        </table>
+      </div>` : ''}
+    </div>
+  </div>
+</div>`;
+}
+
+function renderProjects() {
+  document.getElementById('projectCards').innerHTML = PROJECTS.map(renderCard).join('');
+}
+
+function renderSkills() {
+  document.getElementById('skillsGrid').innerHTML = SKILLS.map(s => `
+<div class="skill-card">
+  <div class="skill-header" onclick="this.parentElement.classList.toggle('open')">
+    ${s.title} ${chevronSVG}
+  </div>
+  <div class="skill-items"><div class="skill-items-inner">
+    ${s.items.map(i => `<span>${i}</span>`).join('')}
+  </div></div>
+</div>`).join('');
+}
+
+function toggleCard(header) {
+  header.closest('.card').classList.toggle('open');
+}
+
+function filterProjects(cat) {
+  const cards = document.querySelectorAll('.card');
+  let visible = 0;
+  cards.forEach(card => {
+    const show = cat === 'all' || card.dataset.cat === cat;
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('noResults').style.display = visible ? 'none' : '';
+  // 台股系列區塊只在「全部」或「Python 工具」時顯示
+  const evoSection = document.querySelector('.section:has(.evo-section)');
+  if (evoSection) evoSection.style.display = (cat === 'all' || cat === 'python') ? '' : 'none';
+}
+
+// ─── Init ───
+renderFilters();
+renderProjects();
+renderSkills();
+</script>
+</body>
+</html>
